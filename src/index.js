@@ -11,6 +11,7 @@ import Inventario from './components/inventario/Inventario.jsx';
 import IngresarMat from './components/inventario/IngresarMat.jsx'
 import ConsultarMat from './components/inventario/ConsultarMat.jsx';
 import EditarMat from './components/inventario/EditarMat.jsx';
+import Reportes from './components/inventario/Reportes.jsx';
 
 import Produccion from './components/produccion/Produccion.jsx';
 import IngresarProd from './components/produccion/IngresarProd.jsx';
@@ -37,6 +38,8 @@ ReactDOM.render(
         <Route path="/inventario/ingresar" element={<IngresarMat/>} />
         <Route path="/inventario/consultar" element={<ConsultarMat/>} />
         <Route path="/inventario/editar" element={<EditarMat/>} />
+        <Route path="/inventario/reportes" element={<Reportes/>} />
+        
         
         <Route path="/produccion" element={<Produccion/>} />
         <Route path="/produccion/crear" element={<IngresarProd/>} />
