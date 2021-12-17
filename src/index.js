@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
+
 // import Main from './components/Main';
 import Login from './components/Login.jsx';
 import DashboardAdmin from './components/administrador/DashboardAdmin.jsx';
@@ -27,16 +28,24 @@ import { BrowserRouter as Router, Route, Routes} from "react-router-dom";
 
 const tipoUsuario = JSON.parse(localStorage.getItem("tipoUsuario")); 
 
-// ReactDOM.render(
-//   <React.StrictMode>
-//     <Router>
-//       <Routes>
-//         <Route path="/" element={<Login/>} />
-//       </Routes>
-//     </Router>
-//   </React.StrictMode>,
-//   document.getElementById('root')
-// );
+// import logozenu from '../logo-zenu.png'
+// import foto from '../usuario.png'
+// import React, { useEffect, useState } from "react";
+
+
+
+// import { Link } from "react-router-dom";
+
+// function ConsultarMat() {
+//     const [listadomaterias, setListadomaterias] = useState([]);
+//     useEffect(() => {
+//         fetch("http://localhost:8082/inventario/consultar")
+//             .then(res => res.json())
+//             .then(res => {
+//                 if (res.estado ==="ok")
+//                     setListadomaterias(res.data);
+//             }).catch(error => console.log(error))
+//     }, []);
 
 
 if (tipoUsuario === "administrador") {
@@ -76,6 +85,7 @@ if (tipoUsuario === "administrador") {
           <Route path="/inventario" element={<Inventario/>} />
           <Route path="/inventario/ingresar" element={<IngresarMat/>} />
           <Route path="/inventario/consultar" element={<ConsultarMat/>} />
+          
           <Route path="/inventario/editar" element={<EditarMat/>} />
           <Route path="/inventario/reportes" element={<ReportesInventario/>} />
         </Routes>

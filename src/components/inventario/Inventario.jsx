@@ -14,7 +14,7 @@ function Inventario() {
         
     <div className="col-12 col-sm-3 col-lg-3" style={{ backgroundColor: "white", borderRadius:"20px" }}>
 
-<nav className="navbar d-flex flex-column justify-content-center mx-auto vh-95 ">
+    <nav className="navbar d-flex flex-column justify-content-center mx-auto vh-95 ">
 
     <ul className="navbar-nav" style={{ color: "floralwhite" }}>
 

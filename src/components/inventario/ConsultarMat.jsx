@@ -88,6 +88,7 @@ function ConsultarMat() {
              {listadomaterias.map(m=><div className="card mx-2 my-2" style={{ width: "18rem", backgroundColor: "darkred", color:"white", textAlign: "center" }}>
                 <div className="card-body text-center" style={{ textAlign: "center" }}>
                         <h5 className="card-title fw-bold">Código:{m.cod}</h5>
+                        <input type="hidden" id={m.cod} value={m.cod} />
                         <p className="card-text">Nombre:{m.nombre}</p>
                         <p className="card-text">Descripcion:{m.descripcion}</p>
                         <Link to= "/inventario/editar" >

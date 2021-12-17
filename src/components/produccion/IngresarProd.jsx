@@ -14,7 +14,7 @@ function Produccion() {
         
     <div className="col-12 col-sm-3 col-lg-3" style={{ backgroundColor: "white", borderRadius:"20px" }}>
 
-<nav className="navbar d-flex flex-column justify-content-center mx-auto vh-95 ">
+    <nav className="navbar d-flex flex-column justify-content-center mx-auto vh-95 ">
 
     <ul className="navbar-nav" style={{ color: "floralwhite" }}>
 
@@ -26,7 +26,7 @@ function Produccion() {
         </li>
 
         <li className="nav-item my-2 text-center " style={{ textDecoration: "none", height:"90px", width:"250px", backgroundColor:"#ffd2bb", borderRadius:"8px" }}>
-            <Link to="/produccion/crer" className="col-6 nav-link fs-4 fw-bold my-3" style={{ color:"rgb(48, 2, 2)", width:"250px", height:"50px", }}>
+            <Link to="/produccion/crear" className="col-6 nav-link fs-4 fw-bold my-3" style={{ color:"rgb(48, 2, 2)", width:"250px", height:"50px", }}>
                 Crear Producto
             </Link>
         </li>
@@ -63,7 +63,7 @@ function Produccion() {
             {/* - head del contenido -  */}
             <div className="row mx-auto my-3 d-flex flex-row justify-content-center" style={{marginBottom: "0px"}}>
             
-                <h1 className="fw-bold col-12 col-sm-8 col-lg-8 text-start" style={{ color: "white" }}>Usuario Produccion</h1>
+                <h1 className="fw-bold col-12 col-sm-8 col-lg-8 text-start" style={{ color: "white" }}>Crear producto</h1>
 
                 <img className="col-6 col-sm-2 col-lg-2" src={foto} style={{ height:"65px", width: "85px" }} alt="user"/>
 

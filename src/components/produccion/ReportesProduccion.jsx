@@ -9,57 +9,62 @@ function ReportesProduccion() {
   return (
   
     <main className="container-fluid"  style={{ fontFamily:"sans-serif"}}>
-        <div className="row vw-100 vh-100"> 
-            <div className="col-12 col-sm-3 col-lg-3" style={{ backgroundColor: "white", borderRadius:"20px" }}>
-                <nav className="navbar d-flex flex-column justify-content-center mx-auto vh-95 ">
-                    <ul className="navbar-nav" style={{ color: "floralwhite" }}>
+    
+    <div className="row vw-100 vh-100">
+        
+    <div className="col-12 col-sm-3 col-lg-3" style={{ backgroundColor: "white", borderRadius:"20px" }}>
 
-                        <li className="nav-item">
-                            <Link to= "/produccion">
-                                <img className="mx-auto d-block" src= {logozenu} style={{ height:"90px" }} alt="icono de la empresa zenu"/>
-                            </Link>
+    <nav className="navbar d-flex flex-column justify-content-center mx-auto vh-95 ">
 
-                        </li>
+    <ul className="navbar-nav" style={{ color: "floralwhite" }}>
 
-                        <li className="nav-item my-2 text-center " style={{ textDecoration: "none", height:"90px", width:"250px", backgroundColor:"#ffd2bb", borderRadius:"8px" }}>
-                            <Link to="/produccion/crer" className="col-6 nav-link fs-4 fw-bold my-3" style={{ color:"rgb(48, 2, 2)", width:"250px", height:"50px", }}>
-                                Crear Producto
-                            </Link>
-                        </li>
+        <li className="nav-item">
+            <Link to= "/produccion" >
+                <img className="mx-auto d-block" src= {logozenu} style={{ height:"90px" }} alt="icono de la empresa zenu"/>
+            </Link>
 
-                        <li className="nav-item my-2 text-center" style={{ textSecoration: "none", height: "90px", width: "250px", backgroundColor:"#ffd2bb", borderRadius:"8px" }}>
-                            <Link to="/produccion/orden" className="col-6 nav-link fs-4 fw-bold my-3" style={{ color: "rgb(48, 2, 2)", width: "250px", height:"50px" }}>
-                            Crear Orden
-                            </Link>
-                        </li>
+        </li>
 
-                        <li className="nav-item my-2 text-center" style={{ textSecoration: "none", height: "90px", width: "250px", backgroundColor:"#ffd2bb", borderRadius:"8px" }}>
-                            <Link to="/produccion/listado" className="col-6 nav-link fs-4 fw-bold my-3" style={{ color: "rgb(48, 2, 2)", width: "250px", height:"50px" }}>
-                            Ver Ordenes
-                            </Link>
-                        </li>
+        <li className="nav-item my-2 text-center " style={{ textDecoration: "none", height:"90px", width:"250px", backgroundColor:"#ffd2bb", borderRadius:"8px" }}>
+            <Link to="/produccion/crear" className="col-6 nav-link fs-4 fw-bold my-3" style={{ color:"rgb(48, 2, 2)", width:"250px", height:"50px", }}>
+                Crear Producto
+            </Link>
+        </li>
 
-                        <li className="nav-item my-2 text-center" style={{ textSecoration: "none", height: "90px", width: "250px", backgroundColor:"#ffd2bb", borderRadius:"8px" }}>
-                            <Link to="/produccion/reportes" className="col-6 nav-link fs-4 fw-bold my-3" style={{ color: "rgb(48, 2, 2)", width: "250px", height:"50px" }}>
-                            Reportes
-                            </Link>
-                        </li>
+        <li className="nav-item my-2 text-center" style={{ textSecoration: "none", height: "90px", width: "250px", backgroundColor:"#ffd2bb", borderRadius:"8px" }}>
+            <Link to="/produccion/orden" className="col-6 nav-link fs-4 fw-bold my-3" style={{ color: "rgb(48, 2, 2)", width: "250px", height:"50px" }}>
+            Crear Orden
+            </Link>
+        </li>
 
-                        <div className="nav-item rounded " style={{ textDecoration: "none", height:"90px", width:"250px", paddingTop:"5%"  }}>
-                            <Link to="/" className="col-6 nav-link fs-4 fw-bold text-center" style={{ color: "rgb(48, 2, 2)", width: "250px", height: "90px" }}>
-                            Logout</Link>
-                        </div>
-                    </ul>
-                </nav>
-            </div>
+        <li className="nav-item my-2 text-center" style={{ textSecoration: "none", height: "90px", width: "250px", backgroundColor:"#ffd2bb", borderRadius:"8px" }}>
+            <Link to="/produccion/listado" className="col-6 nav-link fs-4 fw-bold my-3" style={{ color: "rgb(48, 2, 2)", width: "250px", height:"50px" }}>
+            Ver Ordenes
+            </Link>
+        </li>
+
+        <li className="nav-item my-2 text-center" style={{ textSecoration: "none", height: "90px", width: "250px", backgroundColor:"#ffd2bb", borderRadius:"8px" }}>
+            <Link to="/produccion/reportes" className="col-6 nav-link fs-4 fw-bold my-3" style={{ color: "rgb(48, 2, 2)", width: "250px", height:"50px" }}>
+            Reportes
+            </Link>
+        </li>
+
+        <div className="nav-item rounded " style={{ textDecoration: "none", height:"90px", width:"250px", paddingTop:"5%"  }}>
+            <Link to="/" className="col-6 nav-link fs-4 fw-bold text-center" style={{ color: "rgb(48, 2, 2)", width: "250px", height: "90px" }}>
+            Logout</Link>
         </div>
- 
-        <div className="col-12 col-sm-9 col-lg-9 border border-dark bg-danger" > 
+        
+    </ul>
+
+</nav>
+</div>
+        
+        <div className="col-12 col-sm-9 col-lg-9 border border-dark bg-danger" >
 
             {/* - head del contenido -  */}
             <div className="row mx-auto my-3 d-flex flex-row justify-content-center" style={{marginBottom: "0px"}}>
                 
-                <h1 className="fw-bold col-12 col-sm-8 col-lg-8 text-start" style={{ color: "white" }}>Inventario</h1>
+                <h1 className="fw-bold col-12 col-sm-8 col-lg-8 text-start" style={{ color: "white" }}>Reportes de producción</h1>
 
                 <img className="col-6 col-sm-2 col-lg-2" src={foto} style={{ height:"65px", width: "85px" }} alt="user"/>
 
@@ -69,14 +74,14 @@ function ReportesProduccion() {
 
             </div>
 
-            <div className="row mx-auto my-5 d-flex flex-row flex-wrap justify-content-center">
+            {/* <div className="row mx-auto my-5 d-flex flex-row flex-wrap justify-content-center">
                 <div className="card mx-2 my-2" style={{ width: "50rem", backgroundColor: "darkred", color: "white"  }}>
                     <div className="card-body text-center">
                         <h3 className="card-title fw-bold">Reportes</h3>
                     </div>
                 </div>
-            </div>
-
+            </div> */}
+            <br/><br/>
             {/*- contenido -*/}
             <div className="row mx-auto my-5 d-flex flex-row flex-wrap justify-content-center">
                         
@@ -152,6 +157,8 @@ function ReportesProduccion() {
                 </table>
             </div>
         </div>
+        </div>
+        
         
     </main>
   );

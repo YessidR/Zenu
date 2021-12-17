@@ -102,7 +102,7 @@ function EditarMat() {
                     </div>
 
                     <div className="form-group" style={{ textAlign:"center", paddingTop:"10px" }}>
-                      <button type="submit" className="btn btn-light rounded submit">Guardar</button>
+                      <button type="submit" className="btn btn-light rounded submit">Actualizar</button>
                     </div>
 
 
