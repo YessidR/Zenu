@@ -28,25 +28,6 @@ import { BrowserRouter as Router, Route, Routes} from "react-router-dom";
 
 const tipoUsuario = JSON.parse(localStorage.getItem("tipoUsuario")); 
 
-// import logozenu from '../logo-zenu.png'
-// import foto from '../usuario.png'
-// import React, { useEffect, useState } from "react";
-
-
-
-// import { Link } from "react-router-dom";
-
-// function ConsultarMat() {
-//     const [listadomaterias, setListadomaterias] = useState([]);
-//     useEffect(() => {
-//         fetch("http://localhost:8082/inventario/consultar")
-//             .then(res => res.json())
-//             .then(res => {
-//                 if (res.estado ==="ok")
-//                     setListadomaterias(res.data);
-//             }).catch(error => console.log(error))
-//     }, []);
-
 
 if (tipoUsuario === "administrador") {
   ReactDOM.render(
