@@ -26,18 +26,24 @@ function Main() {
 
             // Yessid: Almacenar nombre usuario en localStorage
             localStorage.setItem("nombreUsuario", JSON.stringify(user));
+            const tipoUsuario = response.data.cargo;
+            localStorage.setItem("tipoUsuario", JSON.stringify(tipoUsuario));
            
         }else if(response.data.cargo === "inventario"){
           { window.location.href = "/inventario" }
 
             // Yessid: Almacenar nombre usuario en localStorage
             localStorage.setItem("nombreUsuario", JSON.stringify(user));
+            const tipoUsuario = response.data.cargo;
+            localStorage.setItem("tipoUsuario", JSON.stringify(tipoUsuario));
 
         }else{
           { window.location.href = "/produccion" }
 
             // Yessid: Almacenar nombre usuario en localStorage
             localStorage.setItem("nombreUsuario", JSON.stringify(user));
+            const tipoUsuario = response.data.cargo;
+            localStorage.setItem("tipoUsuario", JSON.stringify(tipoUsuario));
         }
       } else {
         setError(true);

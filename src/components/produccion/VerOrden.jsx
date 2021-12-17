@@ -5,6 +5,7 @@ import foto from '../usuario.png'
 import { Link } from "react-router-dom";
 
 function VerOrden() {
+    const listaNombre = JSON.parse(localStorage.getItem("nombreUsuario"));
   return (
   
     <main className="container-fluid"  style={{ fontFamily:"sans-serif"}}>
@@ -68,7 +69,7 @@ function VerOrden() {
                 <img className="col-6 col-sm-2 col-lg-2" src={foto} style={{ height:"65px", width: "85px" }} alt="user"/>
 
                 <div className="col-6 col-sm-2 col-lg-2 fw-bold fs-4 text-center" style={{ color: "rgb(243, 7, 7)", backgroundColor: "white", borderRadius: "10px", height:"60px" }}>
-                    <p className="my-2">Camilo</p>
+                    <p className="my-2">{listaNombre}</p>
                 </div>
 
             </div>

@@ -11,11 +11,13 @@ import Inventario from './components/inventario/Inventario.jsx';
 import IngresarMat from './components/inventario/IngresarMat.jsx'
 import ConsultarMat from './components/inventario/ConsultarMat.jsx';
 import EditarMat from './components/inventario/EditarMat.jsx';
+import ReportesInventario from './components/inventario/ReportesInventario.jsx';
 
 import Produccion from './components/produccion/Produccion.jsx';
 import IngresarProd from './components/produccion/IngresarProd.jsx';
 import CrearOrden from './components/produccion/CrearOrden.jsx';
 import VerOrden from './components/produccion/VerOrden.jsx';
+import ReportesProduccion from './components/inventario/ReportesProduccion.jsx';
 
 
 
@@ -32,16 +34,17 @@ ReactDOM.render(
         <Route path="/dashboard" element={<DashboardAdmin/>} />
         <Route path="/dashboard/registrar" element={<DashboardRegistrar/>} />
 
-        
         <Route path="/inventario" element={<Inventario/>} />
         <Route path="/inventario/ingresar" element={<IngresarMat/>} />
         <Route path="/inventario/consultar" element={<ConsultarMat/>} />
         <Route path="/inventario/editar" element={<EditarMat/>} />
+        <Route path="/inventario/reportes" element={<ReportesInventario/>} />
         
         <Route path="/produccion" element={<Produccion/>} />
         <Route path="/produccion/crear" element={<IngresarProd/>} />
         <Route path="/produccion/orden" element={<CrearOrden/>} />
         <Route path="/produccion/listado" element={<VerOrden/>} />
+        <Route path="/inventario/reportes" element={<ReportesProduccion/>} />
         
       </Routes>
     </Router>
