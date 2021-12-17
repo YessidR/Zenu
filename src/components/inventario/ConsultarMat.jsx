@@ -3,8 +3,6 @@ import logozenu from '../logo-zenu.png'
 import foto from '../usuario.png'
 import React, { useEffect, useState } from "react";
 
-
-
 import { Link } from "react-router-dom";
 
 function ConsultarMat() {
@@ -18,7 +16,7 @@ function ConsultarMat() {
             }).catch(error => console.log(error))
     }, []);
 
-    const listaNombre = JSON.parse(localStorage.getItem("nombreUsuario"));
+  const listaNombre = JSON.parse(localStorage.getItem("nombreUsuario"));
     
   return (
 
@@ -85,16 +83,13 @@ function ConsultarMat() {
 
             <div className="row mx-auto my- d-flex flex-row flex-wrap justify-content-center">
 
-             {listadomaterias.map(m=><div className="card mx-2 my-2" style={{ width: "18rem", backgroundColor: "darkred", color:"white", textAlign: "center" }}>
+            {listadomaterias.map(m=><div className="card mx-2 my-2" style={{ width: "18rem", backgroundColor: "darkred", color:"white", textAlign: "center" }}>
                 <div className="card-body text-center" style={{ textAlign: "center" }}>
-                        <h5 className="card-title fw-bold">Código:{m.cod}</h5>
-                        <input type="hidden" id={m.cod} value={m.cod} />
+                        <h5 className="card-title fw-bold" id="codigo">Código:{m.cod}</h5>
                         <p className="card-text">Nombre:{m.nombre}</p>
                         <p className="card-text">Descripcion:{m.descripcion}</p>
-                        <Link to= "/inventario/editar" >
-                        {/*en este boton creo una funcion editar, donde con una varible de estado aseguro el id de la metaria y la envío por esta ruta*/}
-                            <button type="button" className="btn btn-success mx-4" data-bs-toggle="modal" data-bs-target="#editar" >Editar</button>
-                            {/*global.id=m._id*/}
+                        <Link to={`/inventario/editar/${m.cod}`}>
+                        <button  type="button" className="btn btn-success mx-4" id={m.cod } data-bs-toggle="modal" data-bs-target="#editar" >Editar</button>
                         </Link>
                         <button type="button" className="btn btn-warning">Eliminar</button>
                     </div>
