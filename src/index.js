@@ -2,8 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
-
-// import Main from './components/Main';
 import Login from './components/Login.jsx';
 import DashboardAdmin from './components/administrador/DashboardAdmin.jsx';
 import DashboardRegistrar from './components/administrador/DashboardRegistrar.jsx';
@@ -19,8 +17,6 @@ import IngresarProd from './components/produccion/IngresarProd.jsx';
 import CrearOrden from './components/produccion/CrearOrden.jsx';
 import VerOrden from './components/produccion/VerOrden.jsx';
 import ReportesProduccion from './components/produccion/ReportesProduccion.jsx';
-
-
 
 import reportWebVitals from './reportWebVitals';
 
