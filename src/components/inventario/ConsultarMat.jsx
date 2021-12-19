@@ -16,9 +16,9 @@ function ConsultarMat() {
             }).catch(error => console.log(error))
     }, []);
 
-  const listaNombre = JSON.parse(localStorage.getItem("nombreUsuario"));
+    const listaNombre = JSON.parse(localStorage.getItem("nombreUsuario"));
     
-  return (
+    return (
 
     <main className="container-fluid"  style={{ fontFamily:"sans-serif"}}>
 
@@ -87,11 +87,9 @@ function ConsultarMat() {
                 <div className="card-body text-center" style={{ textAlign: "center" }}>
                         <h5 className="card-title fw-bold" id="codigo">Código:{m.cod}</h5>
                         <p className="card-text">Nombre:{m.nombre}</p>
+                        <p className="card-text">Cantidad:{m.cantidad_disponible}</p>
                         <p className="card-text">Descripcion:{m.descripcion}</p>
-                        <Link to={`/inventario/editar/${m.cod}`}>
-                        <button  type="button" className="btn btn-success mx-4" id={m.cod } data-bs-toggle="modal" data-bs-target="#editar" >Editar</button>
-                        </Link>
-                        <button type="button" className="btn btn-warning">Eliminar</button>
+                        
                     </div>
                 </div>)}        
             

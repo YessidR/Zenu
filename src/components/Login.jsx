@@ -52,10 +52,6 @@ function Main() {
   }
   
 }
-
-
-
-
   return (
 
     <main className="container-fluid" style={{ fontFamily: "sans-serif" }}>
