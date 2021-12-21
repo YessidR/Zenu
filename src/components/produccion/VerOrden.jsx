@@ -1,11 +1,38 @@
 // import './App.css';
 import logozenu from '../logo-zenu.png'
 import foto from '../usuario.png'
-
+import React, { useEffect,useState} from "react";
 import { Link } from "react-router-dom";
 
 function VerOrden() {
     const listaNombre = JSON.parse(localStorage.getItem("nombreUsuario"));
+    var [listadoordenes, setListadoordenes] = useState([]);
+    useEffect(() => {
+        fetch("http://localhost:8081/produccion/listado") 
+            .then(res => res.json())
+            .then(res => {
+                if (res.estado ==="ok")
+                    setListadoordenes(res.data);
+                    console.log(res.data);
+
+            }).catch(error => console.log(error))
+    }, []);
+
+    const eliminar= async(_id)=>{
+
+        await fetch("http://localhost:8081/produccion/eliminar", {
+         method: "POST",
+         headers: { "content-type": "application/json" },
+         body: JSON.stringify({_id})
+         }).then(res => res.json())
+         .then(res=>{
+             if (res.estado === "ok"){
+             // alert("Eliminó");
+             { window.location.href = "/produccion/listado" }
+             }
+          })
+
+ }
   return (
   
     <main className="container-fluid"  style={{ fontFamily:"sans-serif"}}>
@@ -77,100 +104,24 @@ function VerOrden() {
 
             {/*- contenido -*/}
             <div className="row mx-auto my-5 d-flex flex-row flex-wrap justify-content-center">
-                    
-                <div className="card mx-2 my-2" style={{ width: "18rem", backgroundColor: "darkred", color: "white"  }}>
-                    <div className="card-body text-center">
-                        <h5 className="card-title fw-bold">Orden cod: S01</h5>
-                        <p className="card-text">Nombre producto: Salchichón</p>
-                        <p className="card-text">Cantidad: 100 kilos</p>
-                        <p className="card-text">Estado: en proceso</p>
-                        <button type="button" className="btn btn-success mx-4" data-bs-toggle="modal" data-bs-target="#editar">Editar</button>
-                        <button type="button" className="btn btn-warning">Eliminar</button>
-                    </div>
-                </div>
 
-                <div className="card mx-2 my-2" style={{ width: "18rem", backgroundColor: "darkred", color: "white"  }}>
-                    <div className="card-body text-center">
-                        <h5 className="card-title fw-bold">Orden cod: J01</h5>
-                        <p className="card-text">Nombre producto: Jamón</p>
-                        <p className="card-text">Cantidad: 60 kilos</p>
-                        <p className="card-text">Estado: en proceso</p>
-                        <button type="button" className="btn btn-success mx-4" data-bs-toggle="modal" data-bs-target="#editar">Editar</button>
-                        <button type="button" className="btn btn-warning">Eliminar</button>
-                    </div>
-                </div>
+            {listadoordenes.map(m=><div className="card mx-2 my-2" style={{ width: "18rem", backgroundColor: "darkred", color:"white", textAlign: "center" }}>
+                <div className="card-body text-center" style={{ textAlign: "center" }}>
+                        <p className="card-text">Producto:{m.nombre}</p>
+                        <p className="card-text">Cantidad:{m.cantidad}</p>
+                        <p className="card-text">Descripcion:{m.estado}</p>
+                        
+                        {/* <Link to={`/produccion/editar/${m._id}`}> */}
+                            <button  type="button" className="btn btn-success mx-4" data-bs-toggle="modal" data-bs-target="#editar">Editar</button> 
+                        {/* </Link> */}
 
-                <div className="card mx-2 my-2" style={{ width: "18rem", backgroundColor: "darkred", color: "white"  }}>
-                    <div className="card-body text-center">
-                        <h5 className="card-title fw-bold">Orden cod: B01</h5>
-                        <p className="card-text">Nombre producto: bacon</p>
-                        <p className="card-text">Cantidad: 30 kils</p>
-                        <p className="card-text">Estado: Finalizado</p>
-                        <button type="button" className="btn btn-success mx-4" data-bs-toggle="modal" data-bs-target="#editar">Editar</button>
-                        <button type="button" className="btn btn-warning">Eliminar</button>
+                        <button onClick={()=>eliminar(m._id)} type="button" className="btn btn-warning">Eliminar</button>               
                     </div>
-                </div>
+                </div>)}             
+                
             </div>
         </div>
-    </div>
-    
-    
-    {/* - modal - */}
-    <div className="modal fade" id="editar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div className="modal-dialog modal-dialog-scrollable">
-          <div className="modal-content">
-            <div className="modal-header">
-                <h5 className="modal-title" id="exampleModalLabel">Modificar Orden #Enumero</h5>
-                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            
-            {/* - parte del cuerpo - */}
-            <div className="modal-body">
-                <form>
-                    <div className="form-group fw-bold fs-4" style={{ color: "white" }}>
-
-                        <table className="table text-center" style={{ color: "white" }}>
-                            
-                            <thead>
-                                <tr>
-                                    <th scope="col">Producto</th>
-                                    <th scope="col">Cantidad</th>
-                                    <th className="col">Estado</th>
-                                </tr>
-                            </thead>
-
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <select className="form-control">
-                                            <option>Producto1</option>
-                                        </select>
-                                    </td>
-                                    <td>
-                                        <input type="number" className="form-control" id="nombre" placeholder="Digite la cantidad" />
-                                    </td>
-                                    <td>
-                                        <select className="form-control">
-                                            <option>En proceso</option>
-                                            <option>Terminado</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                               
-                            </tbody>
-                        </table>
-                    </div>
-                </form>
-            </div>
-            
-            {/* - parte del cuerpo final - */ }
-            <div className="modal-footer">
-                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <button type="button" className="btn btn-danger">Modificar</button>
-            </div>
-          </div>
-        </div>
-      </div>
+    </div>  
     </main>
     
     );

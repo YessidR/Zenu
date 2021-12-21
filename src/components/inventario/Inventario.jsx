@@ -1,4 +1,3 @@
-// import './App.css';
 import logozenu from '../logo-zenu.png'
 import foto from '../usuario.png'
 

@@ -1,38 +1,65 @@
-import logozenu from '../logo-zenu.png'
-import foto from '../usuario.png'
-
+import logozenu from '../logo-zenu.png';
+import foto from '../usuario.png';
+import { useParams } from 'react-router';
+import { useEffect } from 'react/cjs/react.development';
+import { useRef } from 'react';
 import { Link } from "react-router-dom";
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 
-function DashboardRegistrar() {
+function DashboardEditar() {
+    const [vistauser,setVistauser]=useState("");
+    const [actua,setActualizar]=useState("");
+    const [error,setActualizarerror]=useState(false);
+    const usuario=useParams();
+    const user1=usuario.id;
+    const user=user1;
     const nombreR=useRef();
     const userR=useRef();
     const passR=useRef();
     const emailR=useRef();
     const cargoR=useRef();
-    const [guardado,setGuardado]=useState();
-    const [mensaje,setmensaje]=useState();
 
-    function guardar(){
+    //hacemos esta consulta para mostrar la info en los inputs
+    useEffect(() => {
+    fetch("http://localhost:8081/dashboard/consultar/usuarios",{
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({user})
+    }).then(res => res.json())
+    .then(res =>{
+        if (res.estado ==="ok"){
+            setVistauser(res.data);
+            
+        }else{
+            console.log(res.msg);
+        }
+            
+    }).catch(error => console.log(error));
+}, []);
+
+    function actualizar(){
         const nombre=nombreR.current.value;
-        const user=userR.current.value;
-        const password=passR.current.value;
+        const user=vistauser.user;
+        const password=vistauser.password;
         const email=emailR.current.value;
-        const cargo=cargoR.current.value;
+        const cargo=cargoR.current.value;      
 
-        fetch(`http://localhost:8081/dashboard/registrar`, {
+        fetch("http://localhost:8081/dashboard/editarUsuarios", {
             method: "POST",
             headers: { "content-type": "application/json" },
-            body: JSON.stringify({ nombre,user,password,email,cargo })
+            body: JSON.stringify({nombre,user,password,email,cargo})
         }).then(res => res.json())
             .then(res => {
                 if(res.estado === "ok"){
-                    setGuardado(true);
-                    setmensaje(res.msg);
-                    setTimeout(()=>setGuardado(false),2000);
-                    limpiar();
+                    setActualizar(res.msg);
+                    setActualizarerror(true);
+                    setTimeout(()=>setActualizarerror(false),2000);
+                }else{
+                    setActualizar(res.msg);
+                    setActualizarerror(true);
+                    setTimeout(()=>setActualizarerror(false),2000);
                 }
-            }).catch(error=>console.log(error))
+            })
     }
 
     function limpiar(){
@@ -42,6 +69,7 @@ function DashboardRegistrar() {
         emailR.current.value="";
         cargoR.current.value="";
     }
+    
 
     const listaNombre = JSON.parse(localStorage.getItem("nombreUsuario")); 
   return (
@@ -102,7 +130,7 @@ function DashboardRegistrar() {
             {/* - head del contenido -  */}
             <div className="row mx-auto my-3 d-flex flex-row justify-content-center" style={{marginBottom: "0px"}}>
             
-                <h1 className="fw-bold col-12 col-sm-8 col-lg-8 text-start" style={{ color: "white" }}>Registrar Usuario Nuevo</h1>
+                <h1 className="fw-bold col-12 col-sm-8 col-lg-8 text-start" style={{ color: "white" }}>Editar Usuario</h1>
 
                 <img className="col-6 col-sm-2 col-lg-2" src={foto} style={{ height:"65px", width: "85px" }} alt="user"/>
 
@@ -112,27 +140,28 @@ function DashboardRegistrar() {
 
             </div>
 
+            {/* contenido */}
+
             <div className="row justify-content-center">
             <div className="col-md-6 col-lg-5">
-            {guardado && <div class="alert alert-success" role="alert">{mensaje}
+            {error && <div class ="alert alert-success" role="alert">{actua}
             </div>}
                 <form className="mx-auto  w-100 bg-danger my-1  fw-bold fs-4" action="" style={{borderRadius: "12px"}}>
+                    <div className="form-group fw-bold mb-3" style= {{color: "white"}}>
+                        <label style={{fontSize: "18px"}} className="fs-5">Usuario a  editar: {vistauser.user}</label>
+                    </div>
+                    
                     <div className="form-group">
                         <label className="form-label text-light" for="nom">Nombre</label>
-                        <input ref={nombreR} className="form-control" type="text" name="nom" id="nom"/>
+                        <input ref={nombreR} placeholder={vistauser.nombre} className="form-control" type="text" name="nom" id="nom"/>
                     </div>
+
                     <div className="form-group">
-                        <label className="form-label text-light" for="user">User</label>
-                        <input ref={userR} className="form-control" type="text" name="user" id="user"/>
+                        <label className="form-label text-light" for="nom">Correo</label>
+                        <input ref={emailR} placeholder={vistauser.email} className="form-control" type="text" name="nom" id="nom"/>
                     </div>
-                    <div className="form-group">
-                        <label className="form-label text-light" for="pass">Password</label>
-                        <input ref={passR} className="form-control" type="text" name="pass" id="pass"/>
-                    </div>
-                    <div className="form-group">
-                        <label className="form-label text-light" for="email">Email</label>
-                        <input ref={emailR} className="form-control" type="text" name="email" id="email"/>
-                    </div>
+
+                    
                     <div className="form-group">
                         <label className="form-label text-light" for="email">Cargo en la compañia</label>
                         <select  ref={cargoR} className="form-select" aria-label="Default select example">
@@ -141,12 +170,11 @@ function DashboardRegistrar() {
                         </select>    
                     </div>
                     <br/>
-                    <button className="btn d-grid gap-2 w-55 mx-auto my-2 fw-bold" style={{backgroundColor: "brown", color:"white", textAlign: "center"}} type="button" onClick={guardar}>Registrar</button>
+                    <button className="btn d-grid gap-2 w-55 mx-auto my-2 fw-bold" style={{backgroundColor: "brown", color:"white", textAlign: "center"}}
+                     type="button" onClick={actualizar}>Actualizar</button>
                 </form>
             </div>
             <div className="col-12 col-md-1 col-lg-1 d-flex align-items-end flex-wrap justify-content-end "></div>
-
-
             
             </div>
         </div>
@@ -155,4 +183,4 @@ function DashboardRegistrar() {
   );
 }
 
-export default DashboardRegistrar;
+export default DashboardEditar;

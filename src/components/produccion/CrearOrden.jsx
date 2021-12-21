@@ -1,11 +1,42 @@
-// import './App.css';
 import logozenu from '../logo-zenu.png'
 import foto from '../usuario.png'
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 
-function CrearOrden() {
+export function Orden() {
     const listaNombre = JSON.parse(localStorage.getItem("nombreUsuario"));
+    const [ListadoProductos, setListadoProductos] = useState([]);
+    const productoRef = useRef();
+    const cantidadRef = useRef();
+    const estadoRef = useRef();
+
+    useEffect(() => {
+        fetch("http://localhost:8081/produccion/consultar")
+            .then(res => res.json())
+            .then(res => {
+                if (res.estado === "ok")
+                    setListadoProductos(res.data);
+            }).catch(error => console.log(error))
+    }, []);
+
+    function crearOrden() {
+    const producto =  productoRef.current.value;
+    const cantidad = cantidadRef.current.value;
+    const estado = estadoRef.current.value;
+    const combo = document.getElementById("sproducto");
+    const selected = combo.options[combo.selectedIndex].text;
+    const nombre = selected;
+
+    fetch("http://localhost:8081/produccion/crearOrden", {
+            headers: { "content-type": "application/json" },
+            method: "POST",
+            body: JSON.stringify({ producto, nombre, cantidad, estado})
+        }).then(res => res.json())
+            .then(res => {
+                alert(res.msg);
+            }).catch(error => console.log(error))
+    }
+
   return (
   
     <main className="container-fluid"  style={{ fontFamily:"sans-serif"}}>
@@ -92,17 +123,22 @@ function CrearOrden() {
                                 <tbody>
                                     <tr>
                                         <td>
-                                            <select className="form-control">
-                                                <option>Producto1</option>
+                                            <select id="sproducto" ref={productoRef} className="form-control">
+                                            <option value="">-- Seleccione --</option>
+                                            {
+                                            ListadoProductos.map(p => <option key={p._id} value={p._id}>{p.nombre}</option>)
+                                            }
                                             </select>
                                         </td>
                                         <td>
-                                            <input type="number" className="form-control" id="nombre" placeholder="Digite la cantidad"/>
+                                            <input type="number" className="form-control" id="nombre" placeholder="Digite la cantidad" ref={cantidadRef} />
                                         </td>
                                         <td>
-                                            <select className="form-control">
-                                                <option>En proceso</option>
-                                                <option>Terminado</option>
+                                            <select ref={estadoRef} className="form-control">
+                                            <option value="">-- Seleccione --</option>
+                                            <option value="En proceso">En proceso</option>
+                                            <option value="Terminado">Terminado</option>
+                                                
                                             </select>
                                         </td>
                                     </tr>
@@ -111,7 +147,7 @@ function CrearOrden() {
                             </table>
 
                         <div className="form-group" style={{ textAlign:"center", paddingTop:"10px" }} >
-                            <button type="submit" className="fw-bold" style= {{ border: "none", backgroundColor: "darkred", color: "white", borderRadius: "10px", height: "40px", width: "150px" }} > Crear </button>
+                            <button type="button" className="fw-bold" onClick={crearOrden} style= {{ border: "none", backgroundColor: "darkred", color: "white", borderRadius: "10px", height: "40px", width: "200px" }} >Crear Orden</button>
                         </div>
                     </div>
                 </form>
@@ -122,4 +158,4 @@ function CrearOrden() {
   );
 }
 
-export default CrearOrden;
+export default Orden;

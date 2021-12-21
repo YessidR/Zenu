@@ -1,11 +1,66 @@
-// import './App.css';
 import logozenu from '../logo-zenu.png'
 import foto from '../usuario.png'
 
 import { Link } from "react-router-dom";
+import { useState, useEffect } from 'react';
 
 function ReportesInventario() {
     const listaNombre = JSON.parse(localStorage.getItem("nombreUsuario"));
+    const [despachados, setDespachados]=useState([]);
+    const [sindespachar, setSindespachar]=useState([]);
+    const [masvendida, setMasvendida]=useState([]);
+  
+    useEffect(() => {
+    fetch(`http://localhost:8081/inventario/reportes/despachados`, {
+    method: "GET",
+    headers: { "content-type": "application/json" }
+    }).then(res => res.json())
+    .then(res => {
+        if(res.estado === "ok"){
+            setDespachados(res.data)
+        }
+    }).catch(error=>console.log(error))
+    }, []);
+
+    var contadorDes=0;
+    despachados.map((dato) => {
+    if(dato.estado === "despachado"){
+        contadorDes += 1
+    }
+})
+
+    useEffect(() => {
+        fetch(`http://localhost:8081/inventario/reportes/sindespachar`, {
+        method: "GET",
+        headers: { "content-type": "application/json" }
+        }).then(res => res.json())
+        .then(res => {
+            if(res.estado === "ok"){
+                setSindespachar(res.data)
+            }
+        }).catch(error=>console.log(error))
+        }, []);
+
+        var contadorSin=0;
+        sindespachar.map((dato) => {
+        if(dato.estado === "sindespachar"){
+            contadorSin += 1
+        }
+    })
+
+    useEffect(() => {
+        fetch(`http://localhost:8081/inventario/reportes/masvendida`, {
+        method: "GET",
+        headers: { "content-type": "application/json" }
+        }).then(res => res.json())
+        .then(res => {
+            if(res.estado === "ok"){
+                setMasvendida(res.vendida)
+            }
+        }).catch(error=>console.log(error))
+        }, []);
+
+
   return (
   
     <main className="container-fluid"  style={{ fontFamily:"sans-serif"}}>
@@ -46,11 +101,7 @@ function ReportesInventario() {
                         <Link to="/" className="col-6 nav-link fs-4 fw-bold text-center" style={{ color: "rgb(48, 2, 2)", width: "250px", height: "90px" }}>
                         Logout</Link>
                     </div>
-
-
                 </ul>
-
-
             </nav>
         </div>
 
@@ -69,13 +120,6 @@ function ReportesInventario() {
 
             </div>
 
-            {/* <div className="row mx-auto my-5 d-flex flex-row flex-wrap justify-content-center">
-                <div className="card mx-2 my-2" style={{ width: "50rem", backgroundColor: "darkred", color: "white"  }}>
-                    <div className="card-body text-center">
-                        <h3 className="card-title fw-bold">Reportes</h3>
-                    </div>
-                </div>
-            </div> */}
             <br/><br/><br/>
             {/*- contenido -*/}
             <div className="row mx-auto my-5 d-flex flex-row flex-wrap justify-content-center">
@@ -83,12 +127,14 @@ function ReportesInventario() {
                 <div className="card mx-2 my-2" style={{ width: "18rem", backgroundColor: "#ffd2bb", color: "rgb(48, 2, 2)", borderRadius:"8px" }}>
                     <div className="card-body text-center">
                         <h3 className="card-title fw-bold">Materia Prima más vendida</h3>
+                        <h1 className="fw-bold fs-1">{masvendida}</h1>
                     </div>
                 </div>
         
                 <div className="card mx-2 my-2" style={{ width: "18rem", backgroundColor: "#ffd2bb", color: "rgb(48, 2, 2)", borderRadius:"8px"  }}>
                     <div className="card-body text-center">
                         <h3 className="card-title fw-bold">Pedidos por Despachar</h3>
+                        <h1 className="fw-bold fs-1">{contadorSin}</h1>
                     </div>
                 </div>
             </div>
@@ -97,6 +143,7 @@ function ReportesInventario() {
                 <div className="card mx-2 my-2" style={{ width: "18rem", backgroundColor: "#ffd2bb", color: "rgb(48, 2, 2)", borderRadius:"8px"  }}>
                     <div className="card-body text-center">
                         <h3 className="card-title fw-bold">Pedidos despachados</h3>
+                        <h1 className="fw-bold fs-1">{contadorDes}</h1>
                     </div>
                 </div>
             </div>

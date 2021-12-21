@@ -5,6 +5,8 @@ import './index.css';
 import Login from './components/Login.jsx';
 import DashboardAdmin from './components/administrador/DashboardAdmin.jsx';
 import DashboardRegistrar from './components/administrador/DashboardRegistrar.jsx';
+import DashboardUsuarios from './components/administrador/DashboardUsuarios';
+import DashboardEditar from './components/administrador/DashboardEditar';
 
 import Inventario from './components/inventario/Inventario.jsx';
 import IngresarMat from './components/inventario/IngresarMat.jsx'
@@ -16,6 +18,7 @@ import Produccion from './components/produccion/Produccion.jsx';
 import IngresarProd from './components/produccion/IngresarProd.jsx';
 import CrearOrden from './components/produccion/CrearOrden.jsx';
 import VerOrden from './components/produccion/VerOrden.jsx';
+import EditarOrden from './components/produccion/EditarOrden.jsx';
 import ReportesProduccion from './components/produccion/ReportesProduccion.jsx';
 
 import reportWebVitals from './reportWebVitals';
@@ -35,17 +38,21 @@ if (tipoUsuario === "administrador") {
           
           <Route path="/dashboard" element={<DashboardAdmin />} />
           <Route path="/dashboard/registrar" element={<DashboardRegistrar />} />
+          <Route path="/dashboard/usuarios" element={<DashboardUsuarios />} />
+          <Route path="/dashboard/editar/:id" element={<DashboardEditar />} />
             
           <Route path="/inventario" element={<Inventario/>} />
           <Route path="/inventario/ingresar" element={<IngresarMat/>} />
           <Route path="/inventario/consultar" element={<ConsultarMat/>} />
-          <Route path="/inventario/editar" element={<EditarMat/>} />
+          <Route path="/inventario/editar/:id" element={<EditarMat/>} />
           <Route path="/inventario/reportes" element={<ReportesInventario/>} />
+          
           
           <Route path="/produccion" element={<Produccion/>} />
           <Route path="/produccion/crear" element={<IngresarProd/>} />
           <Route path="/produccion/orden" element={<CrearOrden/>} />
           <Route path="/produccion/listado" element={<VerOrden/>} />
+          <Route path="/produccion/editar/:_id" element={<EditarOrden/>} />
           <Route path="/produccion/reportes" element={<ReportesProduccion/>} />
           
         </Routes>
@@ -63,7 +70,7 @@ if (tipoUsuario === "administrador") {
           <Route path="/inventario/ingresar" element={<IngresarMat/>} />
           <Route path="/inventario/consultar" element={<ConsultarMat/>} />
           
-          <Route path="/inventario/editar" element={<EditarMat/>} />
+          <Route path="/inventario/editar/:id" element={<EditarMat/>} />
           <Route path="/inventario/reportes" element={<ReportesInventario/>} />
         </Routes>
       </Router>
@@ -81,6 +88,7 @@ if (tipoUsuario === "administrador") {
           <Route path="/produccion/orden" element={<CrearOrden/>} />
           <Route path="/produccion/listado" element={<VerOrden/>} />
           <Route path="/produccion/reportes" element={<ReportesProduccion/>} />
+          <Route path="/produccion/editar/:_id" element={<EditarOrden/>} />
         </Routes>
       </Router>
     </React.StrictMode>,

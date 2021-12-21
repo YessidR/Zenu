@@ -1,4 +1,3 @@
-// import './App.css';
 import logozenu from '../logo-zenu.png'
 import foto from '../usuario.png'
 
@@ -74,13 +73,6 @@ function ReportesProduccion() {
 
             </div>
 
-            {/* <div className="row mx-auto my-5 d-flex flex-row flex-wrap justify-content-center">
-                <div className="card mx-2 my-2" style={{ width: "50rem", backgroundColor: "darkred", color: "white"  }}>
-                    <div className="card-body text-center">
-                        <h3 className="card-title fw-bold">Reportes</h3>
-                    </div>
-                </div>
-            </div> */}
             <br/><br/>
             {/*- contenido -*/}
             <div className="row mx-auto my-5 d-flex flex-row flex-wrap justify-content-center">

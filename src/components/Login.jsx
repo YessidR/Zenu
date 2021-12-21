@@ -13,7 +13,7 @@ function Main() {
     
     const user = userR.current.value;
     const password = passR.current.value;
-    const response=await fetch("http://localhost:8082/", {
+    const response=await fetch("http://localhost:8081/", {
       headers: { "content-type": "application/json" },
       method: "POST",
       body: JSON.stringify({ user, password })
@@ -24,7 +24,6 @@ function Main() {
         if (response.data.cargo === "administrador") {
           { window.location.href = "/dashboard" }
 
-            // Yessid: Almacenar nombre usuario en localStorage
             localStorage.setItem("nombreUsuario", JSON.stringify(user));
             const tipoUsuario = response.data.cargo;
             localStorage.setItem("tipoUsuario", JSON.stringify(tipoUsuario));
@@ -32,7 +31,6 @@ function Main() {
         }else if(response.data.cargo === "inventario"){
           { window.location.href = "/inventario" }
 
-            // Yessid: Almacenar nombre usuario en localStorage
             localStorage.setItem("nombreUsuario", JSON.stringify(user));
             const tipoUsuario = response.data.cargo;
             localStorage.setItem("tipoUsuario", JSON.stringify(tipoUsuario));
@@ -40,7 +38,6 @@ function Main() {
         }else{
           { window.location.href = "/produccion" }
 
-            // Yessid: Almacenar nombre usuario en localStorage
             localStorage.setItem("nombreUsuario", JSON.stringify(user));
             const tipoUsuario = response.data.cargo;
             localStorage.setItem("tipoUsuario", JSON.stringify(tipoUsuario));

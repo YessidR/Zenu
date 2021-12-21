@@ -1,24 +1,40 @@
-// import './App.css';
 import logozenu from '../logo-zenu.png'
 import foto from '../usuario.png'
-import React, { useEffect, useState } from "react";
+import React, { useEffect,useState} from "react";
 
 import { Link } from "react-router-dom";
 
 function ConsultarMat() {
-    const [listadomaterias, setListadomaterias] = useState([]);
+    var [listadomaterias, setListadomaterias] = useState([]);
     useEffect(() => {
-        fetch("http://localhost:8082/inventario/consultar")
+        fetch("http://localhost:8081/inventario/consultar")
             .then(res => res.json())
             .then(res => {
                 if (res.estado ==="ok")
                     setListadomaterias(res.data);
+                    console.log(res.data);
+                    
             }).catch(error => console.log(error))
     }, []);
 
+    const eliminar= async(cod)=>{
+       
+           await fetch(`http://localhost:8081/inventario/eliminar`, {
+            method: "POST",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify({cod})
+            }).then(res => res.json())
+            .then(res=>{
+                if (res.estado === "ok"){
+                // alert("Eliminó");
+                { window.location.href = "/inventario/consultar" }
+                }
+             })  
+            
+    }
     const listaNombre = JSON.parse(localStorage.getItem("nombreUsuario"));
     
-    return (
+  return (
 
     <main className="container-fluid"  style={{ fontFamily:"sans-serif"}}>
 
@@ -75,7 +91,7 @@ function ConsultarMat() {
                 <img className="col-6 col-sm-2 col-lg-2" src={foto} style={{ height:"65px", width: "85px" }} alt="user"/>
 
                 <div className="col-6 col-sm-2 col-lg-2 fw-bold fs-4 text-center" style={{ color: "rgb(243, 7, 7)", backgroundColor: "white", borderRadius: "10px", height:"60px" }}>
-                <p className="my-2">{listaNombre}</p>
+                    <p className="my-2">{listaNombre}</p>
                 </div>
             </div>
 
@@ -83,13 +99,16 @@ function ConsultarMat() {
 
             <div className="row mx-auto my- d-flex flex-row flex-wrap justify-content-center">
 
-            {listadomaterias.map(m=><div className="card mx-2 my-2" style={{ width: "18rem", backgroundColor: "darkred", color:"white", textAlign: "center" }}>
+             {listadomaterias.map(m=><div className="card mx-2 my-2" style={{ width: "18rem", backgroundColor: "darkred", color:"white", textAlign: "center" }}>
                 <div className="card-body text-center" style={{ textAlign: "center" }}>
                         <h5 className="card-title fw-bold" id="codigo">Código:{m.cod}</h5>
-                        <p className="card-text">Nombre:{m.nombre}</p>
-                        <p className="card-text">Cantidad:{m.cantidad_disponible}</p>
-                        <p className="card-text">Descripcion:{m.descripcion}</p>
+                        <p className="card-text">Nombre: {m.nombre}</p>
+                        <p className="card-text">Descripcion: {m.descripcion}</p>
+                        <p className="card-text">Estado: {m.estado}</p>
                         
+                        <Link to={`/inventario/editar/${m.cod}`}><button  type="button" className="btn btn-success mx-4" data-bs-toggle="modal" data-bs-target="#editar">Editar</button></Link>
+                        
+                        <button onClick={()=>eliminar(m.cod)} type="button" className="btn btn-warning">Eliminar</button>
                     </div>
                 </div>)}        
             

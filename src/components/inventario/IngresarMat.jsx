@@ -1,4 +1,3 @@
-
 import logozenu from '../logo-zenu.png'
 import foto from '../usuario.png'
 import { useRef, useState } from 'react';
@@ -6,7 +5,6 @@ import { useRef, useState } from 'react';
 import { Link } from "react-router-dom";
 
 function IngresarMat() {
-    
     const [guardado,setGuardado]=useState();
     const [mensaje,setmensaje]=useState();
     const nombreR=useRef();
@@ -15,6 +13,7 @@ function IngresarMat() {
     const unidadR=useRef();
     const cantidadR=useRef();
     const valoruR=useRef();
+    const estadoR=useRef();
 
     function guardar(){
         const nombre=nombreR.current.value;
@@ -23,11 +22,12 @@ function IngresarMat() {
         const unidad_medida=unidadR.current.value;
         const cantidad_disponible=cantidadR.current.value;
         const valor_unitario=valoruR.current.value;
+        const estado=estadoR.current.value;
 
-        fetch(`http://localhost:8082/inventario/ingresar`, {
+        fetch(`http://localhost:8081/inventario/ingresar`, {
             method: "POST",
             headers: { "content-type": "application/json" },
-            body: JSON.stringify({ nombre,descripcion,cod,unidad_medida,cantidad_disponible,valor_unitario })
+            body: JSON.stringify({ nombre,descripcion,cod,unidad_medida,cantidad_disponible,valor_unitario,estado })
         }).then(res => res.json())
             .then(res => {
                 if(res.estado === "ok"){
@@ -46,6 +46,7 @@ function IngresarMat() {
         unidadR.current.value="";
         cantidadR.current.value="";
         valoruR.current.value="";
+        estadoR.current.value="";
     }
 
     const listaNombre = JSON.parse(localStorage.getItem("nombreUsuario"));
@@ -107,7 +108,7 @@ function IngresarMat() {
                 <img className="col-6 col-sm-2 col-lg-2" src={foto} style={{ height:"65px", width: "85px" }} alt="user"/>
 
                 <div className="col-6 col-sm-2 col-lg-2 fw-bold fs-4 text-center" style={{ color: "rgb(243, 7, 7)", backgroundColor: "white", borderRadius: "10px", height:"60px" }}>
-                <p className="my-2">{listaNombre}</p>
+                    <p className="my-2">{listaNombre}</p>
                 </div>
             </div>
 
@@ -145,6 +146,13 @@ function IngresarMat() {
                     <div className="form-group fw-bold fs-4" style= {{color: "white" }}>
                         <label for="valorMateria" style={{fontSize: "18px"}}>Valor unitario</label>
                         <input type="text" ref={valoruR} className="form-control" id="valorMateria" placeholder="Ingresar el valor del producto" />
+                    </div>
+                    <div className="form-group fw-bold fs-4" style= {{color: "white" }}>
+                    <label for="valorMateria" style={{fontSize: "18px"}}>Estado</label>
+                        <select ref={estadoR} className="form-control">
+                            <option value="despachado">Despachado</option>
+                            <option value="sindespachar">Sin despachar</option>
+                        </select>
                     </div>
 
                     <div className="form-group" style={{ textAlign:"center", paddingTop:"10px" }} >

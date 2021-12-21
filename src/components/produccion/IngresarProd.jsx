@@ -1,4 +1,3 @@
-// import './App.css';
 import logozenu from '../logo-zenu.png'
 import foto from '../usuario.png'
 import React, { useEffect, useRef, useState } from "react";
@@ -19,10 +18,10 @@ export function Producto() {
     const can5Ref = useRef();
 
     useEffect(() => {
-        fetch("http://localhost:8082/inventario/consultar")
+        fetch("http://localhost:8081/inventario/consultar")
             .then(res => res.json())
             .then(res => {
-                if (res.estado == "ok")
+                if (res.estado === "ok")
                     setListadoMaterias(res.data);
             }).catch(error => console.log(error))
     }, []);
@@ -43,7 +42,7 @@ export function Producto() {
         const cant5 = can5Ref.current.value;
 
         
-        fetch("http://localhost:8082/produccion/crear", {
+        fetch("http://localhost:8081/produccion/crear", {
             headers: { "content-type": "application/json" },
             method: "POST",
             body: JSON.stringify({ nombre, materia1, cant1, materia2, cant2, materia3, cant3, materia4, cant4, materia5, cant5})
@@ -54,7 +53,7 @@ export function Producto() {
     }
 
     const listaNombre = JSON.parse(localStorage.getItem("nombreUsuario"));
-    console.log(ListadoMaterias);
+
     return (
   
     <main className="container-fluid"  style={{ fontFamily:"sans-serif"}}>
